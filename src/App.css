@@ -1,0 +1,1410 @@
+/* =========================================
+   GLOBAL
+========================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  background: #f5f7fb;
+  color: #172033;
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+.workflow-container {
+  min-height: 100vh;
+  padding: 28px;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      #e0e7ff 0%,
+      transparent 30%
+    ),
+    #f5f7fb;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.workflow-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+
+  padding: 24px 28px;
+  margin-bottom: 28px;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #211b58,
+      #342b7d
+    );
+
+  color: white;
+
+  box-shadow:
+    0 15px 35px
+    rgba(38, 31, 104, 0.2);
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand-icon {
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.2);
+
+  border-radius: 12px;
+
+  color: #93c5fd;
+  font-size: 25px;
+}
+
+.eyebrow {
+  margin: 0 0 5px;
+
+  color: #a5b4fc;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.workflow-header h1 {
+  margin: 0;
+
+  color: white;
+
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.header-subtitle {
+  margin: 7px 0 0;
+
+  color: #b8b9d7;
+
+  font-size: 15px;
+}
+
+
+/* =========================================
+   HEADER ACTIONS
+========================================= */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+}
+
+.version-badge {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 74px;
+
+  padding: 8px 12px;
+
+  border-radius: 5px;
+
+  background: #433b99;
+
+  color: #dbeafe;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.version-badge small {
+  margin-top: 2px;
+  font-size: 11px;
+}
+
+
+/* =========================================
+   CONNECTION STATUS
+========================================= */
+
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 14px;
+
+  border-radius: 22px;
+
+  border: 1px solid
+    rgba(16, 185, 129, 0.5);
+
+  background:
+    rgba(16, 185, 129, 0.1);
+
+  color: #a7f3d0;
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.connection-status.offline {
+  border-color:
+    rgba(239, 68, 68, 0.5);
+
+  color: #fecaca;
+
+  background:
+    rgba(239, 68, 68, 0.1);
+}
+
+.connection-dot {
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  background: #10b981;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(16, 185, 129, 0.15);
+}
+
+.connection-status.offline
+.connection-dot {
+  background: #ef4444;
+}
+
+
+/* =========================================
+   HEADER BUTTONS
+========================================= */
+
+.header-button {
+  padding: 10px 14px;
+
+  border-radius: 10px;
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.15);
+
+  background:
+    rgba(255, 255, 255, 0.06);
+
+  color: #e0e7ff;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+
+.header-button:hover {
+  transform: translateY(-1px);
+
+  background:
+    rgba(255, 255, 255, 0.12);
+}
+
+
+/* =========================================
+   CREATE NEW TASK BUTTON
+========================================= */
+
+.new-task-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  min-width: 170px;
+
+  padding: 12px 20px;
+
+  border: none;
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #4f46e5,
+      #7c3aed
+    );
+
+  color: white;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 7px 18px
+    rgba(79, 70, 229, 0.35);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.new-task-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 24px
+    rgba(79, 70, 229, 0.45);
+}
+
+.new-task-button:active {
+  transform: translateY(0);
+}
+
+.new-task-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+
+/* =========================================
+   STATISTICS
+========================================= */
+
+.stats-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 18px;
+
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  min-height: 112px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 20px;
+
+  border: 1px solid #dce3ef;
+  border-radius: 15px;
+
+  background: white;
+
+  box-shadow:
+    0 4px 12px
+    rgba(15, 23, 42, 0.05);
+}
+
+.stat-card span {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.stat-card strong {
+  margin-top: 10px;
+
+  color: #0f172a;
+  font-size: 30px;
+}
+
+.pending-stat {
+  border-color: #fcd34d;
+}
+
+.pending-stat strong {
+  color: #d97706;
+}
+
+.progress-stat {
+  border-color: #93c5fd;
+}
+
+.progress-stat strong {
+  color: #2563eb;
+}
+
+.completed-stat {
+  border-color: #86efac;
+}
+
+.completed-stat strong {
+  color: #059669;
+}
+
+
+/* =========================================
+   FILTER BAR
+========================================= */
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  padding: 15px;
+
+  margin-bottom: 28px;
+
+  border: 1px solid #dce3ef;
+  border-radius: 15px;
+
+  background: white;
+
+  box-shadow:
+    0 4px 12px
+    rgba(15, 23, 42, 0.04);
+}
+
+.search-wrapper {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 0 14px;
+
+  border: 1px solid #d4dce9;
+  border-radius: 10px;
+
+  color: #94a3b8;
+}
+
+.search-wrapper span {
+  font-size: 24px;
+}
+
+.search-wrapper input {
+  width: 100%;
+
+  padding: 12px 0;
+
+  border: none;
+  outline: none;
+
+  color: #1e293b;
+
+  font-size: 14px;
+}
+
+.priority-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.priority-filter label {
+  color: #64748b;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.priority-filter select {
+  min-width: 145px;
+
+  padding: 11px 12px;
+
+  border: 1px solid #d4dce9;
+  border-radius: 10px;
+
+  background: white;
+
+  color: #1e293b;
+
+  outline: none;
+}
+
+
+/* =========================================
+   OFFLINE
+========================================= */
+
+.offline-banner {
+  margin-bottom: 20px;
+
+  padding: 14px 18px;
+
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+
+  background: #fff1f2;
+
+  color: #991b1b;
+
+  font-size: 14px;
+}
+
+
+/* =========================================
+   KANBAN
+========================================= */
+
+.kanban-board {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 20px;
+
+  align-items: start;
+}
+
+.kanban-column {
+  min-height: 500px;
+
+  padding: 20px;
+
+  border: 1px solid #dce3ef;
+  border-radius: 18px;
+
+  background: white;
+
+  box-shadow:
+    0 8px 20px
+    rgba(15, 23, 42, 0.05);
+}
+
+.kanban-column:nth-child(1) {
+  border-top: 4px solid #f59e0b;
+}
+
+.kanban-column:nth-child(2) {
+  border-top: 4px solid #3b82f6;
+}
+
+.kanban-column:nth-child(3) {
+  border-top: 4px solid #10b981;
+}
+
+
+/* =========================================
+   COLUMN HEADER
+========================================= */
+
+.kanban-column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: 16px;
+
+  margin-bottom: 18px;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.kanban-column-header h2 {
+  margin: 0;
+
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.kanban-column:nth-child(1)
+.kanban-column-header h2 {
+  color: #b45309;
+}
+
+.kanban-column:nth-child(2)
+.kanban-column-header h2 {
+  color: #2563eb;
+}
+
+.kanban-column:nth-child(3)
+.kanban-column-header h2 {
+  color: #059669;
+}
+
+.kanban-column-header span {
+  min-width: 32px;
+
+  padding: 5px 10px;
+
+  border-radius: 20px;
+
+  text-align: center;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.kanban-column:nth-child(1)
+.kanban-column-header span {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.kanban-column:nth-child(2)
+.kanban-column-header span {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.kanban-column:nth-child(3)
+.kanban-column-header span {
+  background: #d1fae5;
+  color: #047857;
+}
+
+
+/* =========================================
+   TASK LIST
+========================================= */
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+}
+
+.column-empty {
+  padding: 40px 10px;
+
+  text-align: center;
+
+  color: #94a3b8;
+
+  font-size: 14px;
+}
+
+
+/* =========================================
+   TASK CARD
+========================================= */
+
+.task-card {
+  position: relative;
+
+  padding: 18px;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 13px;
+
+  background: white;
+
+  box-shadow:
+    0 5px 14px
+    rgba(15, 23, 42, 0.05);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.task-card::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  width: 4px;
+
+  border-radius:
+    13px 0 0 13px;
+
+  background: #f59e0b;
+}
+
+.kanban-column:nth-child(2)
+.task-card::before {
+  background: #3b82f6;
+}
+
+.kanban-column:nth-child(3)
+.task-card::before {
+  background: #10b981;
+}
+
+.task-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 24px
+    rgba(15, 23, 42, 0.09);
+}
+
+
+/* =========================================
+   TASK TOP
+========================================= */
+
+.task-card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 12px;
+}
+
+.task-id {
+  padding: 4px 7px;
+
+  border-radius: 5px;
+
+  background: #f1f5f9;
+
+  color: #64748b;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.task-category {
+  color: #64748b;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   TASK CONTENT
+========================================= */
+
+.task-card-content h3 {
+  margin: 0 0 9px;
+
+  color: #172033;
+
+  font-size: 17px;
+}
+
+.task-description {
+  margin: 0 0 10px;
+
+  color: #64748b;
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.task-status {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+.task-status strong {
+  color: #334155;
+}
+
+
+/* =========================================
+   TASK META
+========================================= */
+
+.task-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-top: 15px;
+  padding-top: 12px;
+
+  border-top: 1px solid #edf1f5;
+}
+
+.priority-badge {
+  padding: 5px 9px;
+
+  border-radius: 20px;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.priority-badge.high {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.priority-badge.standard {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.priority-badge.low {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.task-time {
+  color: #94a3b8;
+
+  font-size: 11px;
+}
+
+
+/* =========================================
+   TASK ACTIONS
+========================================= */
+
+.task-actions {
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 15px;
+}
+
+.task-actions button {
+  flex: 1;
+
+  min-height: 44px;
+
+  padding: 10px 12px;
+
+  border: none;
+  border-radius: 9px;
+
+  color: white;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
+}
+
+
+/* =========================================
+   APPROVE / COMPLETE
+========================================= */
+
+.approve-button {
+  background:
+    linear-gradient(
+      135deg,
+      #10b981,
+      #059669
+    );
+
+  color: white;
+
+  box-shadow:
+    0 5px 14px
+    rgba(16, 185, 129, 0.28);
+}
+
+.approve-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 18px
+    rgba(16, 185, 129, 0.38);
+}
+
+
+/* =========================================
+   REJECT
+========================================= */
+
+.reject-button {
+  background:
+    linear-gradient(
+      135deg,
+      #ef4444,
+      #dc2626
+    );
+
+  color: white;
+
+  box-shadow:
+    0 5px 14px
+    rgba(239, 68, 68, 0.25);
+}
+
+.reject-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 18px
+    rgba(239, 68, 68, 0.35);
+}
+
+
+/* =========================================
+   COMPLETE VERIFICATION BUTTON
+========================================= */
+
+.complete-button {
+  width: 100%;
+
+  min-height: 44px;
+
+  padding: 10px 14px;
+
+  border: none;
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #1d4ed8
+    );
+
+  color: white;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 14px
+    rgba(37, 99, 235, 0.28);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.complete-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 18px
+    rgba(37, 99, 235, 0.38);
+}
+
+
+/* =========================================
+   DISABLED ACTIONS
+   ONLY OFFLINE SHOULD BE GRAY
+========================================= */
+
+.task-actions button:disabled,
+.complete-button:disabled {
+  background: #cbd5e1;
+
+  color: #64748b;
+
+  cursor: not-allowed;
+
+  opacity: 0.75;
+
+  box-shadow: none;
+
+  transform: none;
+}
+
+
+/* =========================================
+   MODAL
+========================================= */
+
+.modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background:
+    rgba(15, 23, 42, 0.55);
+
+  backdrop-filter: blur(5px);
+}
+
+.create-task-modal {
+  width: 100%;
+  max-width: 560px;
+
+  padding: 30px;
+
+  border-radius: 18px;
+
+  background: white;
+
+  box-shadow:
+    0 25px 70px
+    rgba(15, 23, 42, 0.25);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 25px;
+}
+
+.modal-header h2 {
+  margin: 0;
+
+  color: #172033;
+
+  font-size: 24px;
+}
+
+.modal-close {
+  border: none;
+
+  background: transparent;
+
+  color: #94a3b8;
+
+  font-size: 25px;
+
+  cursor: pointer;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #334155;
+
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+
+  padding: 12px 14px;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+
+  background: white;
+
+  color: #1e293b;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  outline: none;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #6366f1;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(99, 102, 241, 0.12);
+}
+
+.form-row {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 15px;
+}
+
+
+/* =========================================
+   MODAL ACTIONS
+========================================= */
+
+.modal-actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 12px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid #e5e7eb;
+}
+
+.cancel-button,
+.create-button {
+  padding: 11px 18px;
+
+  border-radius: 9px;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.cancel-button {
+  border: none;
+
+  background: transparent;
+
+  color: #475569;
+}
+
+.create-button {
+  border: none;
+
+  background:
+    linear-gradient(
+      135deg,
+      #4f46e5,
+      #7c3aed
+    );
+
+  color: white;
+
+  box-shadow:
+    0 5px 14px
+    rgba(79, 70, 229, 0.25);
+}
+
+.create-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 8px 18px
+    rgba(79, 70, 229, 0.35);
+}
+
+.create-button:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+
+  box-shadow: none;
+}
+
+
+/* =========================================
+   WORKFLOW TOOLBAR
+========================================= */
+
+.workflow-toolbar {
+  display: flex;
+
+  justify-content: flex-end;
+  align-items: center;
+
+  margin-bottom: 20px;
+}
+
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.empty-state {
+  min-height: 300px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px;
+
+  border-radius: 18px;
+
+  background: white;
+
+  border: 1px solid #dce3ef;
+
+  text-align: center;
+}
+
+.empty-state h2 {
+  margin-bottom: 8px;
+
+  color: #065f46;
+}
+
+.empty-state p {
+  color: #64748b;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+
+  .workflow-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-actions {
+    justify-content: flex-start;
+  }
+
+  .stats-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .kanban-board {
+    grid-template-columns: 1fr;
+  }
+
+  .kanban-column {
+    min-height: auto;
+  }
+}
+
+
+@media (max-width: 700px) {
+
+  .workflow-container {
+    padding: 15px;
+  }
+
+  .workflow-header {
+    padding: 20px;
+  }
+
+  .workflow-header h1 {
+    font-size: 25px;
+  }
+
+  .brand-section {
+    align-items: flex-start;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .priority-filter {
+    justify-content: space-between;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .create-task-modal {
+    padding: 22px;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .cancel-button,
+  .create-button {
+    width: 100%;
+  }
+
+  .header-actions {
+    width: 100%;
+  }
+
+  .new-task-button {
+    width: 100%;
+  }
+
+  .task-actions {
+    flex-direction: column;
+  }
+}
+/* =========================================
+   TASK ACTION BUTTONS - FINAL
+========================================= */
+
+.task-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 17px;
+}
+
+/* ALL TASK BUTTONS */
+.task-actions button {
+  flex: 1;
+  min-height: 42px;
+
+  border: none;
+  border-radius: 8px;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  color: #ffffff;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
+}
+
+/* =========================================
+   PENDING - APPROVE
+========================================= */
+
+.task-actions button:first-child {
+  background: #059669 !important;
+  color: #ffffff !important;
+
+  box-shadow:
+    0 4px 12px rgba(5, 150, 105, 0.30);
+}
+
+.task-actions button:first-child:hover:not(:disabled) {
+  background: #047857 !important;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 7px 18px rgba(5, 150, 105, 0.40);
+}
+
+/* =========================================
+   PENDING - REJECT
+========================================= */
+
+.task-actions button:nth-child(2) {
+  background: #dc2626 !important;
+  color: #ffffff !important;
+
+  box-shadow:
+    0 4px 12px rgba(220, 38, 38, 0.30);
+}
+
+.task-actions button:nth-child(2):hover:not(:disabled) {
+  background: #b91c1c !important;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 7px 18px rgba(220, 38, 38, 0.40);
+}
+
+/* =========================================
+   IN PROGRESS - COMPLETE
+========================================= */
+
+.task-actions .complete-button {
+  width: 100%;
+  flex: 1;
+
+  background: #2563eb !important;
+  color: #ffffff !important;
+
+  border: none;
+
+  box-shadow:
+    0 4px 12px rgba(37, 99, 235, 0.30);
+}
+
+.task-actions .complete-button:hover:not(:disabled) {
+  background: #1d4ed8 !important;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 7px 18px rgba(37, 99, 235, 0.40);
+}
+
+/* =========================================
+   DISABLED
+========================================= */
+
+.task-actions button:disabled {
+  background: #cbd5e1 !important;
+  color: #64748b !important;
+
+  cursor: not-allowed;
+
+  box-shadow: none !important;
+
+  transform: none !important;
+
+  opacity: 1;
+}
+
+/* =========================================
+   FOCUS
+========================================= */
+
+.task-actions button:focus-visible {
+  outline: 3px solid #a5b4fc;
+  outline-offset: 2px;
+}
