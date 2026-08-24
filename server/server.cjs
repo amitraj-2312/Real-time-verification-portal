@@ -1,172 +1,98 @@
 const WebSocket = require("ws");
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 const wss = new WebSocket.Server({
   port: PORT,
+  host: "0.0.0.0",
 });
 
-console.log(
-  `WebSocket server running on ws://localhost:${PORT}`
-);
+console.log(`WebSocket server running on port ${PORT}`);
 
-// =====================================================
-// BROADCAST HELPER
-// =====================================================
+wss.on("connection", (ws) => {
+  console.log("[Server] Client connected");
 
-function broadcast(data) {
-  console.log("[Server] Broadcasting:", data);
-
-  wss.clients.forEach((client) => {
-    console.log(
-      "[Server] Client readyState:",
-      client.readyState
-    );
-
-    if (client.readyState === WebSocket.OPEN) {
-      client.send(JSON.stringify(data));
-
-      console.log(
-        "[Server] Message sent to client:",
-        data
-      );
-    }
-  });
-}
-
-// =====================================================
-// GENERATE TASK ID
-// =====================================================
-
-let nextTaskId = 5;
-
-// =====================================================
-// CLIENT CONNECTION
-// =====================================================
-
-wss.on("connection", (socket) => {
-  console.log("Client connected");
-
-  // Send connection confirmation
-  socket.send(
+  ws.send(
     JSON.stringify({
       type: "CONNECTION_SUCCESS",
-      message: "Connected to Operations Room",
+      message: "Joined Operations Room",
     })
   );
 
-  // ===================================================
-  // MESSAGE
-  // ===================================================
-
-  socket.on("message", (message) => {
+  ws.on("message", (message) => {
     try {
       const data = JSON.parse(message.toString());
 
       console.log("[Server] Received:", data);
 
-      // =================================================
-      // CREATE NEW TASK
-      // =================================================
+      // ==========================================
+      // STATUS UPDATE
+      // ==========================================
 
-      if (
-        data.type === "CREATE_TASK" ||
-        data.type === "NEW_TASK" ||
-        data.type === "TASK_CREATED"
-      ) {
-        const newTask = {
-          id: Number(data.id) || nextTaskId++,
-
-          title:
-            data.title ||
-            data.task?.title ||
-            "New Verification Task",
-
-          status:
-            data.status ||
-            data.task?.status ||
-            "PENDING",
-
-          category:
-            data.category ||
-            data.task?.category ||
-            "Verification",
-
-          priority:
-            data.priority ||
-            data.task?.priority ||
-            "STANDARD",
-
-          description:
-            data.description ||
-            data.task?.description ||
-            "Verification task requiring review.",
+      if (data.type === "STATUS_UPDATE") {
+        const response = {
+          type: "STATUS_UPDATE",
+          taskId: data.taskId,
+          newStatus: data.newStatus,
         };
 
         console.log(
-          "[Server] New task created:",
-          newTask
+          "[Server] Broadcasting:",
+          response
         );
 
-        // Broadcast new task to ALL connected clients
-        broadcast({
+        wss.clients.forEach((client) => {
+          if (client.readyState === WebSocket.OPEN) {
+            client.send(JSON.stringify(response));
+          }
+        });
+
+        return;
+      }
+
+      // ==========================================
+      // CREATE TASK
+      // ==========================================
+
+      if (data.type === "CREATE_TASK") {
+        const task = {
+          ...data.task,
+          status: "PENDING",
+        };
+
+        const response = {
           type: "TASK_CREATED",
-          task: newTask,
-        });
+          task,
+        };
 
-        return;
-      }
-
-      // =================================================
-      // STATUS UPDATE
-      // =================================================
-
-      if (data.type === "STATUS_UPDATE") {
         console.log(
-          "[Server] Status update received:",
-          data
+          "[Server] Broadcasting new task:",
+          response
         );
 
-        broadcast({
-          type: "STATUS_UPDATE",
-          taskId: Number(data.taskId),
-          newStatus: data.newStatus,
+        wss.clients.forEach((client) => {
+          if (client.readyState === WebSocket.OPEN) {
+            client.send(JSON.stringify(response));
+          }
         });
 
         return;
       }
-
-      // =================================================
-      // UNKNOWN MESSAGE
-      // =================================================
-
-      console.log(
-        "[Server] Unknown message type:",
-        data.type
-      );
     } catch (error) {
       console.error(
-        "[Server] Invalid WebSocket message:",
+        "[Server] Message error:",
         error
       );
     }
   });
 
-  // ===================================================
-  // DISCONNECT
-  // ===================================================
-
-  socket.on("close", () => {
-    console.log("Client disconnected");
+  ws.on("close", () => {
+    console.log("[Server] Client disconnected");
   });
 
-  // ===================================================
-  // SOCKET ERROR
-  // ===================================================
-
-  socket.on("error", (error) => {
+  ws.on("error", (error) => {
     console.error(
-      "[Server] WebSocket client error:",
+      "[Server] WebSocket error:",
       error
     );
   });

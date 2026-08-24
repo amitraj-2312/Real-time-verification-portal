@@ -9,7 +9,9 @@ import {
 import KanbanColumn from "./KanbanColumn";
 import CreateTaskModal from "./CreateTaskModal";
 
-const SOCKET_URL = "ws://localhost:8080";
+const SOCKET_URL =
+  import.meta.env.VITE_SOCKET_URL ||
+  "ws://localhost:8080";
 
 const INITIAL_TASKS = [
   {
